@@ -1,0 +1,6 @@
+---
+
+- name: Install nfs-client
+  pkgng:
+    name: nfs-client
+    state: present

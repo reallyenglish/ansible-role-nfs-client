@@ -1,0 +1,5 @@
+- hosts: localhost
+  roles:
+    - ansible-role-nfs-client
+  vars:
+    nfs-client_config: ""
