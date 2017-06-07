@@ -2,4 +2,11 @@
   roles:
     - ansible-role-nfs-client
   vars:
-    nfs-client_config: ""
+    nfs_statd_flags: "-h {{ ansible_default_ipv4.address }}"
+    nfs_lockd_flags: "-h {{ ansible_default_ipv4.address }}"
+    nfs_client_mount:
+      - path: /mnt
+        src: 127.0.0.1:/exports/foo
+        boot: yes
+        opts: ro
+        state: present

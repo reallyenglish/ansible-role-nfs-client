@@ -1,0 +1,30 @@
+---
+
+- name: Enable NFS client
+  template:
+    src: FreeBSD.nfsclient.rc.j2
+    dest: /etc/rc.conf.d/nfsclient
+
+- name: Create /etc/rc.conf.d/lockd
+  template:
+    src: FreeBSD.lockd.rc.j2
+    dest: /etc/rc.conf.d/lockd
+  notify:
+    - Restart lockd
+
+- name: Create /etc/rc.conf.d/statd
+  template:
+    src: FreeBSD.statd.rc.j2
+    dest: /etc/rc.conf.d/statd
+  notify:
+    - Restart statd
+
+- name: Start lockd
+  service:
+    name: lockd
+    state: started
+
+- name: Start statd
+  service:
+    name: statd
+    state: started

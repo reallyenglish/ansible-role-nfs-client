@@ -5,33 +5,13 @@
 
 - include: "install-{{ ansible_os_family }}.yml"
 
-- name: Create log directory
-  file:
-    path: "{{ nfs-client_log_dir }}"
-    mode: 0755
-    owner: "{{ nfs-client_user }}"
-    group: "{{ nfs-client_group }}"
-    state: directory
-  notify: Restart nfs-client
+- include: "configure-{{ ansible_os_family }}.yml"
 
-- name: Create db directory
-  file:
-    path: "{{ nfs-client_db_dir }}"
-    mode: 0755
-    owner: "{{ nfs-client_user }}"
-    group: "{{ nfs-client_group }}"
-    state: directory
-  notify: Restart nfs-client
-
-- name: Create nfs-client.conf
-  template:
-    src: nfs-client.conf.j2
-    dest: "{{ nfs-client_conf_file }}"
-    validate: echo %s
-  notify: Restart nfs-client
-
-- name: Start nfs-client
-  service:
-    name: "{{ nfs-client_service }}"
-    enabled: true
-    state: started
+- name: Mount or unmount nfs_client_mount
+  mount:
+    name: "{{ item.path }}"
+    src: "{{ item.src }}"
+    opts: "{{ item.opts }}"
+    fstype: nfs
+    state: "{{ item.state }}"
+  with_items: "{{ nfs_client_mount }}"
