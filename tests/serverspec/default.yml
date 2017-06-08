@@ -8,4 +8,6 @@
       - path: /mnt
         src: 127.0.0.1:/exports/foo
         opts: ro
+        # do not mount, just modify fstab(5). NFS server is not available in
+        # the test environment
         state: present
