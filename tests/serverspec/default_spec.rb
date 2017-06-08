@@ -8,6 +8,8 @@ default_group = "root"
 case os[:family]
 when "freebsd"
   default_group = "wheel"
+when "openbsd"
+  default_group = "wheel"
 end
 
 case os[:family]

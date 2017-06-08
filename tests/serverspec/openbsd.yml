@@ -1,0 +1,9 @@
+- hosts: localhost
+  roles:
+    - ansible-role-nfs-client
+  vars:
+    nfs_client_mount:
+      - path: /mnt
+        src: 127.0.0.1:/exports/foo
+        opts: ro
+        state: present
