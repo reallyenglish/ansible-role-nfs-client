@@ -74,7 +74,6 @@ when "ubuntu"
     it { should be_running }
   end
 
-  puts os[:release]
   statd_service = os[:release].to_f >= 16.04 ? "rpc-statd" : "statd"
   describe service(statd_service) do
     it { should be_enabled }
