@@ -1,7 +1,7 @@
 ---
 galaxy_info:
   author: Tomoyuki Sakurai
-  description: Configures something
+  description: Configures NFS client
   company: Reallyenglish
   license: BSD
   min_ansible_version: 2.0
@@ -21,6 +21,6 @@ galaxy_info:
     - 7
 
   galaxy_tags:
-    - system
+    - nfs
 #dependencies:
 #  - { role: username.common, some_parameter: 3 }
