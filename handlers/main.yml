@@ -1,6 +1,21 @@
 ---
 
-- name: Restart nfs-client
+- name: Restart statd
   service:
-    name: nfs-client
+    name: statd
     state: restarted
+
+- name: Reload statd
+  service:
+    name: statd
+    state: reloaded
+
+- name: Restart lockd
+  service:
+    name: statd
+    state: restarted
+
+- name: Reload lockd
+  service:
+    name: statd
+    state: reloaded

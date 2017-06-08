@@ -1,8 +1,6 @@
-nfs-client_user: nfs-client
-nfs-client_group: nfs-client
-nfs-client_log_dir: /var/log/nfs-client
-nfs-client_db_dir: "{{ __nfs-client_db_dir }}"
-nfs-client_service: nfs-client
-nfs-client_conf_dir: "{{ __nfs-client_conf_dir }}"
-nfs-client_conf_file: "{{ __nfs-client_conf_dir }}/nfs-client.conf"
-nfs-client_flags: ""
+nfs_client_service: nfsclient
+nfs_client_flags: ""
+nfs_client_mount: []
+
+nfs_statd_flags: ""
+nfs_lockd_flags: ""
