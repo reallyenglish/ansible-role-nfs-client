@@ -33,6 +33,16 @@ platforms:
       extra_vars:
         ansible_python_interpreter: '/usr/local/bin/python'
 
+  - name: ubuntu-14.04-amd64
+    driver:
+      box: trombik/ansible-ubuntu-14.04-amd64
+      box_check_update: false
+
+  - name: ubuntu-16.04-amd64
+    driver:
+      box: trombik/ansible-ubuntu-16.04-amd64
+      box_check_update: false
+
 suites:
   - name: default
     provisioner:
@@ -41,3 +51,15 @@ suites:
     verifier:
       name: shell
       command: rspec -c -f d -I tests/serverspec tests/serverspec/default_spec.rb
+    excludes:
+      - ubuntu-14.04-amd64
+      - ubuntu-16.04-amd64
+  - name: ubuntu
+    provisioner:
+      name: ansible_playbook
+      playbook: tests/serverspec/ubuntu.yml
+    verifier:
+      name: shell
+      command: rspec -c -f d -I tests/serverspec tests/serverspec/default_spec.rb
+    excludes:
+      - freebsd-10.3-amd64

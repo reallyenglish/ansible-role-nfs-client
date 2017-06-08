@@ -4,3 +4,9 @@ nfs_client_mount: []
 
 nfs_statd_flags: ""
 nfs_lockd_flags: ""
+
+nfs_client_statd_flags: ""
+nfs_client_rpcbind_flags: ""
+nfs_client_need_gssd: "no"
+nfs_client_need_idmapd: "no"
+nfs_client_need_statd: "yes"

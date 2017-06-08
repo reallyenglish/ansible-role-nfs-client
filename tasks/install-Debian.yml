@@ -1,0 +1,11 @@
+---
+
+- name: Install rpcbind
+  apt:
+    name: rpcbind
+    state: present
+
+- name: Install nfs-common
+  apt:
+    name: nfs-common
+    state: present
