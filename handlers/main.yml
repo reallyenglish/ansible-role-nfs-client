@@ -12,10 +12,10 @@
 
 - name: Restart lockd
   service:
-    name: statd
+    name: lockd
     state: restarted
 
 - name: Reload lockd
   service:
-    name: statd
+    name: lockd
     state: reloaded
