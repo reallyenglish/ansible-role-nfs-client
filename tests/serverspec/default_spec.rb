@@ -1,22 +1,13 @@
 require "spec_helper"
 require "serverspec"
 
-ports   = []
-package = ""
+ports = []
 default_user = "root"
 default_group = "root"
 
 case os[:family]
 when "freebsd"
   default_group = "wheel"
-end
-
-case os[:family]
-when /bsd$/
-else
-  describe package(package) do
-    it { should be_installed }
-  end
 end
 
 case os[:family]
@@ -62,7 +53,7 @@ describe file("/etc/fstab") do
   it { should be_mode 644 }
   it { should be_owned_by default_user }
   it { should be_grouped_into default_group }
-  its(:content) { should match(/^#{Regexp.escape("127.0.0.1:/exports/foo")}\s+\/mnt\s+nfs\s+ro\s+0\s+0/) }
+  its(:content) { should match(%r{^#{Regexp.escape("127.0.0.1:/exports/foo")}\s+\/mnt\s+nfs\s+ro\s+0\s+0}) }
 end
 
 ports.each do |p|

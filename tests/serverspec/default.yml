@@ -7,6 +7,5 @@
     nfs_client_mount:
       - path: /mnt
         src: 127.0.0.1:/exports/foo
-        boot: yes
         opts: ro
         state: present
