@@ -2,7 +2,7 @@ nfs_client_service: nfsclient
 nfs_client_flags: ""
 nfs_client_mount: []
 
-nfs_lockd_flags: ""
+nfs_client_lockd_flags: ""
 
 nfs_client_statd_flags: ""
 nfs_client_rpcbind_flags: ""
