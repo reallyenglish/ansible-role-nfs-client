@@ -1,2 +1,1 @@
-__nfs-client_db_dir: /var/db/nfs-client
-__nfs-client_conf_dir: /usr/local/etc/nfs-client
+---
