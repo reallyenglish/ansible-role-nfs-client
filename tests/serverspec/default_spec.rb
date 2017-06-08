@@ -80,6 +80,10 @@ when "ubuntu"
     it { should be_enabled }
     it { should be_running }
   end
+when "redhat"
+  describe package("nfs-utils") do
+    it { should be_installed }
+  end
 end
 
 describe file("/etc/fstab") do

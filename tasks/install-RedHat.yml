@@ -1,0 +1,6 @@
+---
+
+- name: Install nfs-utils
+  yum:
+    name: nfs-utils
+    state: present
