@@ -2,7 +2,7 @@
   roles:
     - ansible-role-nfs-client
   vars:
-    nfs_statd_flags: "-h {{ ansible_default_ipv4.address }}"
+    nfs_client_statd_flags: "-h {{ ansible_default_ipv4.address }}"
     nfs_lockd_flags: "-h {{ ansible_default_ipv4.address }}"
     nfs_client_mount:
       - path: /mnt
