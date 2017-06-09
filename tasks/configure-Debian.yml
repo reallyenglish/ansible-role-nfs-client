@@ -1,5 +1,8 @@
 ---
 
+- set_fact:
+    nfs_client_nfs_common_flags_merged: "{{ nfs_client_nfs_common_flags_default | combine(nfs_client_nfs_common_flags) }}"
+
 - name: Create /etc/default/nfs-common
   template:
     src: Ubuntu.nfs-common.default.j2
