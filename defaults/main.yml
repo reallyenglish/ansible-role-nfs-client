@@ -1,6 +1,11 @@
-nfs_client_service: nfsclient
-nfs_client_flags: ""
 nfs_client_mount: []
 
-nfs_statd_flags: ""
-nfs_lockd_flags: ""
+# FreeBSD only
+nfs_client_lockd_flags: ""
+nfs_client_statd_flags: ""
+
+# Debian/Ubuntu only
+nfs_client_rpcbind_flags: ""
+nfs_client_need_gssd: "no"
+nfs_client_need_idmapd: "no"
+nfs_client_need_statd: "yes"

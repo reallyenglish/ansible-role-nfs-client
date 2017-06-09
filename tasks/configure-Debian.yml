@@ -1,0 +1,25 @@
+---
+
+- name: Create /etc/default/nfs-common
+  template:
+    src: Ubuntu.nfs-common.default.j2
+    dest: /etc/default/nfs-common
+    backup: yes
+
+- name: Create /etc/default/rpcbind
+  template:
+    src: Ubuntu.rpcbind.default.j2
+    dest: /etc/default/rpcbind
+    backup: yes
+
+- name: Start RPC
+  service:
+    name: rpcbind
+    enabled: yes
+    state: started
+
+- name: Start statd
+  service:
+    name: "{% if ansible_distribution_version | version_compare('16.04', '>=') %}rpc-statd{% else %}statd{% endif %}"
+    enabled: yes
+    state: started

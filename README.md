@@ -1,6 +1,10 @@
 # ansible-role-nfs-client
 
-A brief description of the role goes here.
+Configure NFSv3 client.
+
+## Notes about NFSv4
+
+NFSv4 is not yet supported.
 
 # Requirements
 
@@ -8,9 +12,41 @@ None
 
 # Role Variables
 
-| variable | description | default |
+| Variable | Description | Default |
 |----------|-------------|---------|
+| `nfs_client_mount` | list of mount configurations. see below  | `[]` |
 
+## FreeBSD-specific Role Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `nfs_client_lockd_flags` | options for `lockd` | `""` |
+| `nfs_client_statd_flags` | options for `statd` | `""` |
+
+## Debian/Ubuntu-specific Role Variables
+
+| Variable | Description | Default |
+|----------|-------------|---------|
+| `nfs_client_rpcbind_flags` | options for `rpcbind` | `""` |
+| `nfs_client_need_gssd`     | `NEED_GSSD` in `/etc/default/nfs-common` | `no` |
+| `nfs_client_need_idmapd`   | `NEED_IDMAPD` in `/etc/default/nfs-common` | `no` |
+| `nfs_client_need_statd`    | `NEED_STATD` in `/etc/default/nfs-common` | `yes` |
+
+## `nfs_client_mount`
+
+A list of NFS mount settings. Element is a dict of mount settings, which is
+described below.
+
+| Key | Description | Mandatory |
+|-----|-------------|-----------|
+| `path`  | mount point | yes |
+| `src`   | remote NFS path to mount | yes |
+| `opts`  | mount options | yes |
+| `state` | one of `present`, `absent`, `mounted`, or `unmounted` | yes |
+
+```yaml
+
+```
 
 # Dependencies
 
@@ -18,7 +54,71 @@ None
 
 # Example Playbook
 
+## FreeBSD
+
 ```yaml
+- hosts: localhost
+  roles:
+    - ansible-role-nfs-client
+  vars:
+    nfs_client_statd_flags: "-h {{ ansible_default_ipv4.address }}"
+    nfs_client_lockd_flags: "-h {{ ansible_default_ipv4.address }}"
+    nfs_client_mount:
+      - path: /mnt
+        src: 127.0.0.1:/exports/foo
+        opts: ro
+        # do not mount, just modify fstab(5). NFS server is not available in
+        # the test environment
+        state: present
+```
+
+## Ubuntu
+
+```yaml
+- hosts: localhost
+  roles:
+    - ansible-role-nfs-client
+  vars:
+    nfs_client_rpcbind_flags: -w
+    nfs_client_mount:
+      - path: /mnt
+        src: 127.0.0.1:/exports/foo
+        opts: ro
+        # do not mount, just modify fstab(5). NFS server is not available in
+        # the test environment
+        state: present
+```
+
+## CentOS
+
+```yaml
+- hosts: localhost
+  roles:
+    - ansible-role-nfs-client
+  vars:
+    nfs_client_mount:
+      - path: /mnt
+        src: 127.0.0.1:/exports/foo
+        opts: ro
+        # do not mount, just modify fstab(5). NFS server is not available in
+        # the test environment
+        state: present
+```
+
+## OpenBSD
+
+```yaml
+- hosts: localhost
+  roles:
+    - ansible-role-nfs-client
+  vars:
+    nfs_client_mount:
+      - path: /mnt
+        src: 127.0.0.1:/exports/foo
+        opts: ro
+        # do not mount, just modify fstab(5). NFS server is not available in
+        # the test environment
+        state: present
 ```
 
 # License
