@@ -28,9 +28,16 @@ None
 | Variable | Description | Default |
 |----------|-------------|---------|
 | `nfs_client_rpcbind_flags` | options for `rpcbind` | `""` |
-| `nfs_client_need_gssd`     | `NEED_GSSD` in `/etc/default/nfs-common` | `no` |
-| `nfs_client_need_idmapd`   | `NEED_IDMAPD` in `/etc/default/nfs-common` | `no` |
-| `nfs_client_need_statd`    | `NEED_STATD` in `/etc/default/nfs-common` | `yes` |
+| `nfs_client_nfs_common_flags` | dict to override `nfs_client_nfs_common_flags_default` | `{}` |
+| `nfs_client_nfs_common_flags_default` | dict of variables for `/etc/default/nfs-common` | see below |
+
+### `nfs_client_nfs_common_flags_default`
+
+```yaml
+nfs_client_nfs_common_flags_default:
+  NEED_GSSD: ""
+  STATDOPTS: ""
+```
 
 ## `nfs_client_mount`
 
