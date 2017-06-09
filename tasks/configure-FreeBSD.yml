@@ -4,11 +4,13 @@
   template:
     src: FreeBSD.nfsclient.rc.j2
     dest: /etc/rc.conf.d/nfsclient
+    validate: sh -n %s
 
 - name: Create /etc/rc.conf.d/lockd
   template:
     src: FreeBSD.lockd.rc.j2
     dest: /etc/rc.conf.d/lockd
+    validate: sh -n %s
   notify:
     - Restart lockd
 
@@ -16,6 +18,7 @@
   template:
     src: FreeBSD.statd.rc.j2
     dest: /etc/rc.conf.d/statd
+    validate: sh -n %s
   notify:
     - Restart statd
 
