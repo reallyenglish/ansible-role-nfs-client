@@ -55,9 +55,8 @@ when "ubuntu"
     it { should be_owned_by default_user }
     it { should be_grouped_into default_group }
     its(:content) { should match(/^STATDOPTS=""$/) }
-    its(:content) { should match(/^NEED_GSSD="no"$/) }
+    its(:content) { should match(/^NEED_GSSD=""$/) }
     its(:content) { should match(/^NEED_STATD="yes"$/) }
-    its(:content) { should match(/^NEED_IDMAPD="no"$/) }
   end
 
   describe file("/etc/default/rpcbind") do

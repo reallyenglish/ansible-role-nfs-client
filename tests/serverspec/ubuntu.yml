@@ -2,6 +2,9 @@
   roles:
     - ansible-role-nfs-client
   vars:
+    nfs_client_nfs_common_flags:
+      NEED_STATD: "yes"
+      STATDOPTS: ""
     nfs_client_rpcbind_flags: -w
     nfs_client_mount:
       - path: /mnt

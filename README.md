@@ -1,6 +1,21 @@
 # ansible-role-nfs-client
 
-Configure NFSv3 client.
+Configure NFSv3 client. This role enables locking mechanism in NFSv3. It is
+possible to `mount(8)` NFS exports without extra configurations. If you do not
+need locking in NFSv3, the role does not provide anything other than managing
+NFS mounts in `fstab(5)`.
+
+## Notes for OpenBSD users
+
+As OpenBSD does not support NFSv3 lock in client-side, the role has little use
+for OpenBSD users.
+
+[`rpc.lockd(8)`](http://man.openbsd.org/rpc.lockd.8) states:
+
+> The current implementation provides only the server side of the protocol
+> (i.e., clients running other OS types can establish locks on an OpenBSD
+> fileserver, but there is currently no means for an OpenBSD client to
+> establish locks).
 
 ## Notes about NFSv4
 
@@ -27,10 +42,17 @@ None
 
 | Variable | Description | Default |
 |----------|-------------|---------|
-| `nfs_client_rpcbind_flags` | options for `rpcbind` | `""` |
-| `nfs_client_need_gssd`     | `NEED_GSSD` in `/etc/default/nfs-common` | `no` |
-| `nfs_client_need_idmapd`   | `NEED_IDMAPD` in `/etc/default/nfs-common` | `no` |
-| `nfs_client_need_statd`    | `NEED_STATD` in `/etc/default/nfs-common` | `yes` |
+| `nfs_client_rpcbind_flags` | extra options to be passed to `rpcbind` | `""` |
+| `nfs_client_nfs_common_flags` | dict to override `nfs_client_nfs_common_flags_default` | `{}` |
+| `nfs_client_nfs_common_flags_default` | dict of variables for `/etc/default/nfs-common` | see below |
+
+### `nfs_client_nfs_common_flags_default`
+
+```yaml
+nfs_client_nfs_common_flags_default:
+  NEED_GSSD: ""
+  STATDOPTS: ""
+```
 
 ## `nfs_client_mount`
 

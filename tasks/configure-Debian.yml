@@ -1,15 +1,20 @@
 ---
 
+- set_fact:
+    nfs_client_nfs_common_flags_merged: "{{ nfs_client_nfs_common_flags_default | combine(nfs_client_nfs_common_flags) }}"
+
 - name: Create /etc/default/nfs-common
   template:
     src: Ubuntu.nfs-common.default.j2
     dest: /etc/default/nfs-common
+    validate: sh -n %s
     backup: yes
 
 - name: Create /etc/default/rpcbind
   template:
     src: Ubuntu.rpcbind.default.j2
     dest: /etc/default/rpcbind
+    validate: sh -n %s
     backup: yes
 
 - name: Start RPC
